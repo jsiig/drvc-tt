@@ -11,11 +11,11 @@ export default class Game {
   }
 
   roll () {
-    if (!this.userInput.length) return this.generateRandom()
+    if (!this.userInput.length) return this.randomResult()
     else return this.debugResult()
   }
 
-  generateRandom () {
+  randomResult () {
     return [randomInt(MAX), randomInt(MAX), randomInt(MAX)]
   }
 

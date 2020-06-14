@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import winnings from './winnings'
+import { checkRows, rowConditions } from './winnings'
 import { REEL_FACE_NAMES } from './constants/faces'
 
 export default class GameResult {
@@ -11,24 +11,20 @@ export default class GameResult {
   getWinnings () {
     const rows = this.getFaceNames()
 
-    const allWinnings = [
-      winnings.allCherries(rows),
-      winnings.allSevens(rows),
-      winnings.all3Bars(rows),
-      winnings.all2Bars(rows),
-      winnings.allBars(rows),
-      winnings.anyCherryAndSeven(rows),
-      winnings.anyBarSymbols(rows)
-    ].filter(item => item.amount)
+
+    const allWinnings = Object.keys(rowConditions)
+      .map(item => checkRows(item, rows))
+      .filter(item => item.amount)
 
     if (!allWinnings.length) return
 
     const amount = Math.max(...allWinnings.map(winning => winning.amount))
-    const { row } = allWinnings.find(item => item.amount === amount)
+    const { row, kind } = allWinnings.find(item => item.amount === amount)
 
     return {
       row,
-      amount
+      amount,
+      kind
     }
   }
 

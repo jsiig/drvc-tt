@@ -3,121 +3,90 @@ const DEFAULT_WINNINGS = {
   row: null
 }
 
-export const winningsTable = {
+const BAR_SYMBOLS = ['3xBAR', '2xBAR', 'BAR']
 
+export const winningsTable = [
+  {
+    kind: 'allCherries',
+    description: 'All cherries on row',
+    wins: {
+      top: 2000,
+      middle: 1000,
+      bottom: 4000
+    }
+  },
+  {
+    kind: 'allSevens',
+    description: 'All sevens on any row',
+    wins: {
+      all: 150
+    }
+  },
+  {
+    kind: 'all3Bars',
+    description: 'All 3xBARs on any row',
+    wins: {
+      all: 50
+    }
+  },
+
+  {
+    kind: 'all2Bars',
+    description: 'All 2xBARs on any row',
+    wins: {
+      all: 20
+    }
+  },
+  {
+    kind: 'allBars',
+    description: 'All BARs on any row',
+    wins: {
+      all: 10
+    }
+  },
+  {
+    kind: 'anyCherryAndSeven',
+    description: 'Any cherry and seven on a row',
+    wins: {
+      all: 75
+    }
+  },
+  {
+    kind: 'anyBarSymbols',
+    description: 'Any bar symbols combined on any row',
+    wins: {
+      all: 5
+    }
+  }
+]
+
+const getSpecificOrAny = (wins, row) => wins.all ? wins.all : wins[row]
+const getWinningAmounts = (kind, row) => getSpecificOrAny(winningsTable.find(item => item.kind === kind).wins, row)
+
+export const rowConditions = {
+  allCherries: row => row.every(item => item === 'CHERRY'),
+  allSevens: row => row.every(item => item === '7'),
+  all3Bars: row => row.every(item => item === '3xBAR'),
+  all2Bars: row => row.every(item => item === '2xBAR'),
+  allBars: row => row.every(item => item === 'BAR'),
+  anyCherryAndSeven: row => row.includes('CHERRY') && row.includes('7'),
+  anyBarSymbols: row => row.filter(symbol => BAR_SYMBOLS.includes(symbol)).length === 3
 }
 
-export default {
-  allCherries (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach((rowName) => {
-      const row = rows[rowName]
-
-      if (row.every(item => item === 'CHERRY')) {
-        winnings.row = rowName
-        switch (rowName) {
-          case 'top':
-            winnings.amount = 2000
-            break
-          case 'middle':
-            winnings.amount = 1000
-            break
-          case 'bottom':
-            winnings.amount = 4000
-        }
-      }
-    })
-
-    return winnings
-  },
-
-  allSevens (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-
-      if (row.every(item => item === '7')) {
-        winnings.row = rowName
-        winnings.amount = 150
-      }
-    })
-    return winnings
-  },
-
-  all3Bars (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-      if (row.every(item => item === '3xBAR')) {
-        winnings.row = rowName
-        winnings.amount = 50
-      }
-    })
-
-    return winnings
-  },
-
-  all2Bars (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-      if (row.every(item => item === '2xBAR')) {
-        winnings.row = rowName
-        winnings.amount = 20
-      }
-    })
-
-    return winnings
-  },
-
-  allBars (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-      if (row.every(item => item === 'BAR')) {
-        winnings.row = rowName
-        winnings.amount = 10
-      }
-    })
-
-    return winnings
-  },
-
-  anyCherryAndSeven (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-      if (
-        row.includes('CHERRY') && row.includes('7')
-      ) {
-        winnings.row = rowName
-        winnings.amount = 75
-      }
-    })
-
-    return winnings
-  },
-
-  anyBarSymbols (rows) {
-    const winnings = DEFAULT_WINNINGS
-
-    Object.keys(rows).forEach(rowName => {
-      const row = rows[rowName]
-      const BAR_SYMBOLS = ['3xBAR', '2xBAR', 'BAR']
-      if (
-        row.filter(symbol => BAR_SYMBOLS.includes(symbol)).length === 3
-      ) {
-        winnings.row = rowName
-        winnings.amount = 5
-      }
-    })
-
-    return winnings
+export const checkRows = (condition, rows) => {
+  const winnings = {
+    ...DEFAULT_WINNINGS,
+    kind: 'allCherries'
   }
+
+  Object.keys(rows).forEach(rowName => {
+    const row = rows[rowName]
+    if (rowConditions[condition](row)) {
+      winnings.amount = getWinningAmounts(winnings.kind, rowName)
+      winnings.row = rowName
+      winnings.kind = condition
+    }
+  })
+
+  return winnings
 }

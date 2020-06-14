@@ -9,40 +9,52 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     fixed: false,
-    fixedParams: {
-
-    },
     reelState: [1, 2, 3],
-    balance: 0
+    balance: 5,
+    rollInProgress: false,
+    winHistory: []
   },
   mutations: {
     setDebug (state, fixed) {
       state.fixed = fixed
     },
+
     setReelState (state, reelOptions) {
       state.reelState = reelOptions
+      state.rollInProgress = true
+    },
+
+    updateBalance (state, newBalance) {
+      state.balance = newBalance
+    },
+
+    pushWinnings (state, winning) {
+      state.winHistory.push(winning)
     }
   },
 
   actions: {
-    randomGameMove ({ commit, getters }) {
-      const game = new Game()
-      const moveResults = game.generateRandom()
-
-      commit('setReelState', moveResults)
-      const gameResult = new GameResult(getters.getFullReelState)
-      console.log(moveResults)
-      console.log(gameResult.getFaceNames())
-      console.log(gameResult.getWinnings())
-    },
-
-    gameMove ({ commit, getters }, data = []) {
-      const game = new Game(data)
+    gameMove ({ commit, state }, moveTo = []) {
+      commit('updateBalance', state.balance - 1)
+      const game = new Game(moveTo)
 
       commit('setReelState', game.roll())
+    },
 
-      console.log(data)
-      console.log(new GameResult(getters.getFullReelState).getFaceNames())
+    rollFinished ({ commit, getters, state }, reelIndex) {
+      if (reelIndex !== 2) return
+
+      const gameResult = new GameResult(getters.getFullReelState)
+      const winnings = gameResult.getWinnings()
+
+      if (winnings) {
+        console.log('WIN!')
+        commit('pushWinnings', winnings)
+        commit('updateBalance', state.balance + winnings.amount)
+        console.log(state.balance)
+      }
+
+      console.log(gameResult.getFaceNames(), winnings)
     }
   },
 

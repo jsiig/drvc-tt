@@ -16,6 +16,8 @@
 import { REEL_FACES } from '../constants/faces'
 import Face from './Face'
 
+import { mapActions } from 'vuex'
+
 const EACH_FRAME_DEGREE_CHANGE = 18
 
 export default {
@@ -59,6 +61,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['rollFinished']),
+
     rollTheReel (position) {
       const positionDeg = (360 / 20) * position * -1
 
@@ -77,7 +81,7 @@ export default {
       if ((performance.now() - this.timer) > this.rollingTimeMin &&
         remainder === toPositionDeg
       ) {
-        this.$emit('finished')
+        this.rollFinished(this.reelIndex)
         return
       }
       requestAnimationFrame(() => this.rollTheReelToPosition(toPositionDeg))
