@@ -1,20 +1,22 @@
 <template>
-  <div class="debugger__wrap">
-    <button @click="toggleDebugger" class="debugger__button">Debug</button>
-    <div class="debugger" :class="{'debugger--visible': visible}">
-      <div class="debugger__inner-wrap">
-        <div v-for="n in 3" :key="n">
-          <select v-model="groups[n - 1].value">
-            <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
-          </select>
+  <div class="debugger__outer" :class="{'debugger__outer--active': visible}">
+    <div class="debugger__wrap">
+      <button @click="toggleDebugger" class="debugger__button">Debug</button>
+      <div class="debugger" :class="{'debugger--visible': visible}">
+        <div class="debugger__inner-wrap">
+          <div class="debugger__column" v-for="n in 3" :key="n">
+            <select v-model="groups[n - 1].value">
+              <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
+            </select>
 
-          <select v-model="groups[n - 1].row">
-            <option value="top">Top</option>
-            <option value="middle">Centre</option>
-            <option value="bottom">Bottom</option>
-          </select>
+            <select v-model="groups[n - 1].row">
+              <option value="top">Top</option>
+              <option value="middle">Centre</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+          <SpinButton class="spin-button" @roll="setDebug">DEBUG SPIN</SpinButton>
         </div>
-        <SpinButton class="spin-button" @roll="setDebug">SIMULATE SPIN</SpinButton>
       </div>
     </div>
   </div>
@@ -85,8 +87,14 @@ export default {
       }
     }
 
+    &__outer {
+      &--active {
+        padding-top: 200px;
+      }
+    }
+
     &--visible {
-      max-height: 500px;
+      max-height: 200px;
     }
 
     &__button {
@@ -102,6 +110,10 @@ export default {
       height: 36px;
       background-color: $button-background;
       font-family: 'Goblin One', cursive;
+    }
+
+    &__column {
+      padding: 12px;
     }
 
     &__wrap {

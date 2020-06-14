@@ -8,7 +8,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item) in winningsTable" :key="item.kind">
+      <tr v-for="(item) in winningsTable"
+        :class="{'winning': (lastWin && lastWin.kind === item.kind) && !spinInProgress}"
+        :key="item.kind">
         <td>{{item.description}}</td>
         <td>
           <img v-for="(face, index) in item.examples" :key="index" :src="`/assets/reel/${face}.png`">
@@ -27,12 +29,14 @@
 <script>
 import { REEL_FACES } from '../constants/faces'
 import { winningsTable } from '../winnings'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'WinningsTable',
 
-  components: {
-
+  computed: {
+    ...mapGetters(['lastWin']),
+    ...mapState(['spinInProgress'])
   },
 
   data () {
@@ -45,6 +49,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  @keyframes winning {
+    0% {
+      background-color: rgba($reel-background, 0);
+      color: $reel-background;
+    }
+    50% {
+      background-color: $reel-background;
+      color: #FFF;
+    }
+    100%{
+      background-color: rgba($reel-background, 0);
+      color: $reel-background;
+    }
+  }
+
   table {
     width: 100%;
     background: $table-background;
@@ -84,6 +104,12 @@ export default {
     th:last-child, td:last-child {
       padding-right: 20px;
       text-align: right;
+    }
+
+    tr.winning {
+      animation-name: winning;
+      animation-duration: 1s;
+      animation-iteration-count: 3;
     }
   }
 </style>

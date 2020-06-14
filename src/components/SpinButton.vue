@@ -1,6 +1,19 @@
 <template>
-  <button @click="$emit('roll')"><slot></slot></button>
+  <button :disabled="rollInProgress" @click="$emit('roll')"><slot></slot></button>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  name: 'SpinButton',
+
+  computed: {
+    ...mapState(['rollInProgress'])
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   button {
     margin-top: $game-margin;

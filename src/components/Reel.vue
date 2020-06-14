@@ -81,7 +81,7 @@ export default {
       if ((performance.now() - this.timer) > this.rollingTimeMin &&
         remainder === toPositionDeg
       ) {
-        this.rollFinished(this.reelIndex)
+        setTimeout(() => this.rollFinished(this.reelIndex), 1000)
         return
       }
       requestAnimationFrame(() => this.rollTheReelToPosition(toPositionDeg))

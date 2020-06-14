@@ -24,6 +24,10 @@ export default new Vuex.Store({
       state.rollInProgress = true
     },
 
+    finishRoll (state) {
+      state.rollInProgress = false
+    },
+
     updateBalance (state, newBalance) {
       state.balance = newBalance
     },
@@ -43,7 +47,7 @@ export default new Vuex.Store({
 
     rollFinished ({ commit, getters, state }, reelIndex) {
       if (reelIndex !== 2) return
-
+      commit('finishRoll')
       const gameResult = new GameResult(getters.fullReelState)
       const winnings = gameResult.getWinnings()
 
@@ -52,6 +56,8 @@ export default new Vuex.Store({
         commit('pushWinnings', winnings)
         commit('updateBalance', state.balance + winnings.amount)
         console.log(state.balance)
+      } else {
+        commit('pushWinnings', null)
       }
 
       console.log(gameResult.getFaceNames(), winnings)

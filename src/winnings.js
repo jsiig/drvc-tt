@@ -82,16 +82,15 @@ export const rowConditions = {
 
 export const checkRows = (condition, rows) => {
   const winnings = {
-    ...DEFAULT_WINNINGS,
-    kind: 'allCherries'
+    ...DEFAULT_WINNINGS
   }
 
   Object.keys(rows).forEach(rowName => {
     const row = rows[rowName]
     if (rowConditions[condition](row)) {
-      winnings.amount = getWinningAmounts(winnings.kind, rowName)
-      winnings.row = rowName
       winnings.kind = condition
+      winnings.row = rowName
+      winnings.amount = getWinningAmounts(condition, rowName)
     }
   })
 
