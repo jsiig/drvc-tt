@@ -1,28 +1,53 @@
 <template>
-  <form @submit.prevent="setDebug">
-    <input type="number" min="0" max="9" v-model="debugMode.middle[0]">
-    <input type="number" min="0" max="9" v-model="debugMode.middle[1]">
-    <input type="number" min="0" max="9" v-model="debugMode.middle[2]">
-    <button type="submit">Submit</button>
-  </form>
+  <div class="debugger">
+    <form @submit.prevent="setDebug">
+      <div v-for="n in 3" :key="n">
+        <select v-model="groups[n - 1].value">
+          <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
+        </select>
+
+        <select v-model="groups[n - 1].row">
+          <option value="top">Top</option>
+          <option value="middle">Centre</option>
+          <option value="bottom">Bottom</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </template>
 
 <script>
+import { REEL_FACES } from '../constants/faces'
+
+const defaultDebugOptions = {
+  row: 'top',
+  value: 0
+}
+
 export default {
   name: 'Debug',
 
   data () {
     return {
-      debugMode: {
-        middle: ['', '', '']
-      }
+      reelFaces: REEL_FACES,
+      groups: [
+        {
+          ...defaultDebugOptions
+        },
+        {
+          ...defaultDebugOptions
+        },
+        {
+          ...defaultDebugOptions
+        }
+      ]
     }
   },
 
   methods: {
     setDebug () {
-      const debugMode = this.debugMode.middle.map(i => i.length ? parseInt(i) : null)
-      this.$store.dispatch('debugGameMove', debugMode)
+      this.$store.dispatch('gameMove', this.groups)
     }
   }
 }

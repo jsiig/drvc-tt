@@ -24,17 +24,17 @@ export default {
     Face
   },
   props: {
-    position: {
-      type: Number,
-      required: true
-    },
-
     allPositions: {
       type: Array,
       required: true
     },
 
     rollingTimeMin: {
+      type: Number,
+      required: true
+    },
+
+    reelIndex: {
       type: Number,
       required: true
     }
@@ -53,6 +53,9 @@ export default {
       return {
         transform: `rotateX(${this.currentReelPositionDeg}deg) rotateY(0deg)`
       }
+    },
+    position () {
+      return this.allPositions[this.reelIndex]
     }
   },
   methods: {

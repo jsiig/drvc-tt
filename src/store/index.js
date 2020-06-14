@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Game, { GameResult } from '../game'
+import Game from '../game'
+import GameResult from '../gameResult'
+import translateDirection from '../translateDirection'
 
 Vue.use(Vuex)
-const MIN_STATE = 0
-const MAX_STATE = 9
 
 export default new Vuex.Store({
   state: {
@@ -30,16 +30,16 @@ export default new Vuex.Store({
       const moveResults = game.generateRandom()
 
       commit('setReelState', moveResults)
+      const gameResult = new GameResult(getters.getFullReelState)
       console.log(moveResults)
-      console.log(new GameResult(getters.getFullReelState).getFaceNames())
+      console.log(gameResult.getFaceNames())
+      console.log(gameResult.getWinnings())
     },
 
-    debugGameMove ({ commit, getters }, data) {
-      if (!(data instanceof Array) || data.length !== 3) {
-        throw new TypeError('Data must be array of 3 elements')
-      }
+    gameMove ({ commit, getters }, data = []) {
+      const game = new Game(data)
 
-      commit('setReelState', data)
+      commit('setReelState', game.roll())
 
       console.log(data)
       console.log(new GameResult(getters.getFullReelState).getFaceNames())
@@ -47,31 +47,19 @@ export default new Vuex.Store({
   },
 
   getters: {
-    getTopReelState ({ reelState }) {
-      return reelState.map(stateItem => {
-        const topStateItem = stateItem + 1
-
-        if (topStateItem > MAX_STATE) return MIN_STATE
-        else if (topStateItem < MIN_STATE) return MAX_STATE
-        else return topStateItem
-      })
+    topReelState ({ reelState }) {
+      return translateDirection.translateAbove(reelState)
     },
 
-    getBottomReelState ({ reelState }) {
-      return reelState.map(stateItem => {
-        const bottomStateItem = stateItem - 1
-
-        if (bottomStateItem > MAX_STATE) return MIN_STATE
-        else if (bottomStateItem < MIN_STATE) return MAX_STATE
-        else return bottomStateItem
-      })
+    bottomReelState ({ reelState }) {
+      return translateDirection.translateBelow(reelState)
     },
 
     getFullReelState ({ reelState }, getters) {
       return {
-        top: [...getters.getTopReelState],
+        top: [...getters.topReelState],
         middle: [...reelState],
-        bottom: [...getters.getBottomReelState]
+        bottom: [...getters.bottomReelState]
       }
     }
   },

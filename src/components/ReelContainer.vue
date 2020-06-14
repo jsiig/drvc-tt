@@ -1,19 +1,17 @@
 <template>
   <div class="reel-container">
-    <Reel ref="reel1" :all-positions="reelPositions" :position="reelPositions[0]" :rolling-time-min="2500" />
-    <Reel ref="reel2" :all-positions="reelPositions" :position="reelPositions[1]" :rolling-time-min="3000" />
-    <Reel ref="reel3" :all-positions="reelPositions" :position="reelPositions[2]" :rolling-time-min="3500" />
-    <SpinButton @roll="roll"></SpinButton>
+    <Reel ref="reel1" :all-positions="reelPositions" :reel-index="0" :rolling-time-min="2000" />
+    <Reel ref="reel2" :all-positions="reelPositions" :reel-index="1" :rolling-time-min="2500" />
+    <Reel ref="reel3" :all-positions="reelPositions" :reel-index="2" :rolling-time-min="3000" />
   </div>
 </template>
 
 <script>
 import Reel from './Reel'
-import SpinButton from './SpinButton'
 
 export default {
   name: 'ReelContainer',
-  components: { Reel, SpinButton },
+  components: { Reel },
   data () {
     return {
 
@@ -25,9 +23,6 @@ export default {
     }
   },
   methods: {
-    roll () {
-      this.$store.dispatch('randomGameMove')
-    }
   }
 }
 </script>
