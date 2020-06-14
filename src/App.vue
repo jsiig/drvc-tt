@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="slot-machine-app">
+    <Game></Game>
+    <Debug></Debug>
+    <!-- <TestReel></TestReel> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Game from './components/Game'
+import Debug from './components/Debug'
+// import TestReel from './components/TestReel'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Game,
+    Debug
+    // TestReel
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html, body {
+  height: 100%;
+  width: 100%;
+  background: #000;
+  &, * { box-sizing: border-box; }
+  margin: 0;
+}
+#slot-machine-app {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
 }
 </style>
