@@ -107,17 +107,8 @@ export default {
     overflow: hidden;
     width: 200px;
     height: 225px;
-    background: #000;
+    background: $reel-background;
     font-size: 175%;
-    &:after {
-      position: absolute;
-      content: '';
-      top: 0;
-      bottom: 0;
-      left: -24px;
-      right: -24px;
-      box-shadow: inset 0 0 20px 4px rgba(0,0,0,1)
-    }
   }
 
   .scene, .reel-cylinder, .face {

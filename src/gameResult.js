@@ -11,7 +11,6 @@ export default class GameResult {
   getWinnings () {
     const rows = this.getFaceNames()
 
-
     const allWinnings = Object.keys(rowConditions)
       .map(item => checkRows(item, rows))
       .filter(item => item.amount)

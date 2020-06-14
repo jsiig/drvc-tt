@@ -3,12 +3,14 @@
     <Balance></Balance>
     <ReelContainer></ReelContainer>
     <SpinButton @roll="roll"></SpinButton>
+    <WinningsTable></WinningsTable>
   </div>
 </template>
 
 <script>
 import ReelContainer from './ReelContainer'
 import SpinButton from './SpinButton'
+import WinningsTable from './WinningsTable'
 import Balance from './Balance'
 
 export default {
@@ -16,7 +18,8 @@ export default {
   components: {
     ReelContainer,
     SpinButton,
-    Balance
+    Balance,
+    WinningsTable
   },
   methods: {
     roll () {

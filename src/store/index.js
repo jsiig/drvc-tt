@@ -44,7 +44,7 @@ export default new Vuex.Store({
     rollFinished ({ commit, getters, state }, reelIndex) {
       if (reelIndex !== 2) return
 
-      const gameResult = new GameResult(getters.getFullReelState)
+      const gameResult = new GameResult(getters.fullReelState)
       const winnings = gameResult.getWinnings()
 
       if (winnings) {
@@ -67,12 +67,16 @@ export default new Vuex.Store({
       return translateDirection.translateBelow(reelState)
     },
 
-    getFullReelState ({ reelState }, getters) {
+    fullReelState ({ reelState }, getters) {
       return {
         top: [...getters.topReelState],
         middle: [...reelState],
         bottom: [...getters.bottomReelState]
       }
+    },
+
+    lastWin ({ winHistory }) {
+      return winHistory[winHistory.length - 1] || undefined
     }
   },
 

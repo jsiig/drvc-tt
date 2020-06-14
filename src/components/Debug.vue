@@ -1,24 +1,23 @@
 <template>
   <div class="debugger">
-    <form @submit.prevent="setDebug">
-      <div v-for="n in 3" :key="n">
-        <select v-model="groups[n - 1].value">
-          <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
-        </select>
+    <div v-for="n in 3" :key="n">
+      <select v-model="groups[n - 1].value">
+        <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
+      </select>
 
-        <select v-model="groups[n - 1].row">
-          <option value="top">Top</option>
-          <option value="middle">Centre</option>
-          <option value="bottom">Bottom</option>
-        </select>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+      <select v-model="groups[n - 1].row">
+        <option value="top">Top</option>
+        <option value="middle">Centre</option>
+        <option value="bottom">Bottom</option>
+      </select>
+    </div>
+    <SpinButton @roll="setDebug">SPIN</SpinButton>
   </div>
 </template>
 
 <script>
 import { REEL_FACES } from '../constants/faces'
+import SpinButton from './SpinButton'
 
 const defaultDebugOptions = {
   row: 'top',
@@ -27,6 +26,10 @@ const defaultDebugOptions = {
 
 export default {
   name: 'Debug',
+
+  components: {
+    SpinButton
+  },
 
   data () {
     return {
@@ -52,3 +55,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  .debugger {
+
+  }
+</style>

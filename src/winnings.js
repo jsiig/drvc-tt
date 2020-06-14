@@ -9,6 +9,7 @@ export const winningsTable = [
   {
     kind: 'allCherries',
     description: 'All cherries on row',
+    examples: ['CHERRY', 'CHERRY', 'CHERRY'],
     wins: {
       top: 2000,
       middle: 1000,
@@ -18,6 +19,7 @@ export const winningsTable = [
   {
     kind: 'allSevens',
     description: 'All sevens on any row',
+    examples: ['7', '7', '7'],
     wins: {
       all: 150
     }
@@ -25,6 +27,7 @@ export const winningsTable = [
   {
     kind: 'all3Bars',
     description: 'All 3xBARs on any row',
+    examples: ['3xBAR', '3xBAR', '3xBAR'],
     wins: {
       all: 50
     }
@@ -33,6 +36,7 @@ export const winningsTable = [
   {
     kind: 'all2Bars',
     description: 'All 2xBARs on any row',
+    examples: ['2xBAR', '2xBAR', '2xBAR'],
     wins: {
       all: 20
     }
@@ -40,6 +44,7 @@ export const winningsTable = [
   {
     kind: 'allBars',
     description: 'All BARs on any row',
+    examples: ['BAR', 'BAR', 'BAR'],
     wins: {
       all: 10
     }
@@ -47,6 +52,7 @@ export const winningsTable = [
   {
     kind: 'anyCherryAndSeven',
     description: 'Any cherry and seven on a row',
+    examples: ['CHERRY', '7'],
     wins: {
       all: 75
     }
@@ -54,6 +60,7 @@ export const winningsTable = [
   {
     kind: 'anyBarSymbols',
     description: 'Any bar symbols combined on any row',
+    examples: BAR_SYMBOLS,
     wins: {
       all: 5
     }
