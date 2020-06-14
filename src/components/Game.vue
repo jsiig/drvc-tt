@@ -2,7 +2,7 @@
   <div>
     <Balance></Balance>
     <ReelContainer></ReelContainer>
-    <SpinButton @roll="roll"></SpinButton>
+    <SpinButton @roll="roll">SPIN</SpinButton>
     <WinningsTable></WinningsTable>
   </div>
 </template>

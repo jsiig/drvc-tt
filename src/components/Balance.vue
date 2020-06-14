@@ -29,6 +29,7 @@ export default {
     font-family: 'Goblin One', cursive;
     padding: 24px;
     border-radius: 32px;
+    margin-top: $game-margin;
 
     input {
       outline: none;

@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('roll')">SPIN</button>
+  <button @click="$emit('roll')"><slot></slot></button>
 </template>
 <style lang="scss" scoped>
   button {
