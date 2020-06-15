@@ -15,6 +15,7 @@ export default {
   name: 'Balance',
   data () {
     return {
+      // Use local balance in component, manually update balance in store
       localBalance: 5,
       error: null
     }
@@ -30,10 +31,14 @@ export default {
 
   methods: {
     updateGlobalBalance () {
-      if (parseInt(this.localBalance) <= 5000) {
-        this.$store.commit('updateBalance', parseInt(this.localBalance))
-      } else {
+      const balance = parseInt(this.localBalance)
+
+      if (balance <= 5000 && balance >= 0) {
+        this.$store.commit('updateBalance', balance)
+      } else if (balance > 5000) {
         this.localBalance = 5000
+      } else {
+        this.localBalance = 0
       }
     }
   },

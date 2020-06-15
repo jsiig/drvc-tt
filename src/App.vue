@@ -26,6 +26,9 @@ html, body {
   &, * { box-sizing: border-box; }
   margin: 0;
   font-family: "Roboto Slab", Times, Georgia, serif;
+
+  // Our reels are unfortunately not responsive :(
+  min-width: 700px;
 }
 #slot-machine-app {
   display: flex;

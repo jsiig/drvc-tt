@@ -28,8 +28,6 @@ export default {
     line-height: 32px;
     outline: none;
     cursor: pointer;
-    //font-family: 'Goblin One', cursive;
-    //font-family: 'Passion One', cursive;
     font-family: 'Smokum', cursive;
   }
 </style>
