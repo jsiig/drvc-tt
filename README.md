@@ -4,7 +4,7 @@
 
 ### Some notes, approaches, regrets and limitations
 
-* Built using Vue.JS + Vuex.
+* Built using VueJS + Vuex.
 * The game starts with a balance of 5 virtual dollars.
 * Most game logic happens around the Vuex store and the various game 
 logic files directly in `./src` directory.
@@ -29,14 +29,14 @@ getting all three updates in time (as the triggered data change
 only stops after timer finishes when it reaches the correct position, it
 means that the rolling time for the reels is slightly offset by the time
 it takes to reach those positions from the moment timeout is reached.
-* Even though the reels themselves have 10 faces, only the first 5 are
-actually landed upon. Others are there for aesthetic purposes of the
-spin of the reels.
+* Even though the reels themselves have 10 faces, only 5 are
+actually landed upon. Others are there for aesthetic purposes (for the
+spinning of the reels effect to work visually).
 * Some tests have been added for game logic's public API (Game.js and 
 GameResult.js), so that expected internal game behaviour can be verified
 programmatically. However, in clear 20:20 hindsight, test driven
-development would have been a better approach in this case in the
-first place - I'd have avoided a few headaches.
+development would have been a better approach in the first place - I'd 
+have avoided a few headaches.
 * Game and GameResult don't actually need to be classes.
 
 ### Potential future improvements
