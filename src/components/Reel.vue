@@ -4,7 +4,7 @@
       <div class="reel-cylinder">
         <div v-for="index in 10" class="face" :class="'s'+ index" :key="index">
           <div class="reel-image">
-            <Face :src="'/assets/reel/' + reelFaces[index-1].src"></Face>
+            <Face :name="reelFaces[index-1].name"></Face>
           </div>
         </div>
       </div>

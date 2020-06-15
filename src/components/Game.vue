@@ -2,12 +2,13 @@
   <div>
     <Balance></Balance>
     <ReelContainer></ReelContainer>
-    <SpinButton @roll="roll">SPIN</SpinButton>
+    <SpinButton @roll="gameMove">SPIN</SpinButton>
     <WinningsTable></WinningsTable>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import ReelContainer from './ReelContainer'
 import SpinButton from './SpinButton'
 import WinningsTable from './WinningsTable'
@@ -21,10 +22,9 @@ export default {
     Balance,
     WinningsTable
   },
+
   methods: {
-    roll () {
-      this.$store.dispatch('gameMove')
-    }
+    ...mapActions(['gameMove'])
   }
 }
 </script>

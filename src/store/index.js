@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Game from '../game'
-import GameResult from '../gameResult'
+import Game from '../Game'
+import GameResult from '../GameResult'
 import translateDirection from '../translateDirection'
 
 Vue.use(Vuex)
@@ -14,6 +14,7 @@ export default new Vuex.Store({
     rollInProgress: false,
     winHistory: []
   },
+
   mutations: {
     setDebug (state, fixed) {
       state.fixed = fixed
@@ -80,9 +81,5 @@ export default new Vuex.Store({
     lastWin ({ winHistory }) {
       return winHistory[winHistory.length - 1] || undefined
     }
-  },
-
-  modules: {
-
   }
 })

@@ -8,10 +8,16 @@
 export default {
   name: 'Face',
   props: {
-    src: {
+    name: {
       type: String,
       required: false,
       default: ''
+    }
+  },
+
+  computed: {
+    src () {
+      return '/assets/reel/' + this.name + '.png'
     }
   }
 }

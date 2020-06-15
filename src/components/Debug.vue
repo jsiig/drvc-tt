@@ -4,7 +4,7 @@
       <button @click="toggleDebugger" class="debugger__button">Debug</button>
       <div class="debugger" :class="{'debugger--visible': visible}">
         <div class="debugger__inner-wrap">
-          <div class="debugger__column" v-for="(group) in groups" :key="group">
+          <div class="debugger__column" v-for="(group, groupIndex) in groups" :key="groupIndex">
             <label>
               <select v-model="group.value">
                 <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>

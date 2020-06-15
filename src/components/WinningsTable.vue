@@ -4,7 +4,7 @@
       <tr>
         <th>Description</th>
         <th></th>
-        <th>Win (coins)</th>
+        <th>$$$</th>
       </tr>
     </thead>
     <tbody>
