@@ -1,24 +1,24 @@
-export const BAR3 = {
+const BAR3 = {
   name: '3xBAR',
   value: 0
 }
 
-export const BAR = {
+const BAR = {
   name: 'BAR',
   value: 2
 }
 
-export const BAR2 = {
+const BAR2 = {
   name: '2xBAR',
   value: 4
 }
 
-export const SEVEN = {
+const SEVEN = {
   name: '7',
   value: 6
 }
 
-export const CHERRY = {
+const CHERRY = {
   name: 'CHERRY',
   value: 8
 }
