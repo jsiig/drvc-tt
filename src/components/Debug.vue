@@ -4,16 +4,20 @@
       <button @click="toggleDebugger" class="debugger__button">Debug</button>
       <div class="debugger" :class="{'debugger--visible': visible}">
         <div class="debugger__inner-wrap">
-          <div class="debugger__column" v-for="n in 3" :key="n">
-            <select v-model="groups[n - 1].value">
-              <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
-            </select>
+          <div class="debugger__column" v-for="(group) in groups" :key="group">
+            <label>
+              <select v-model="group.value">
+                <option :key="face.value" :value="face.value" v-for="(face) in reelFaces">{{face.name}}</option>
+              </select>
+            </label>
 
-            <select v-model="groups[n - 1].row">
-              <option value="top">Top</option>
-              <option value="middle">Centre</option>
-              <option value="bottom">Bottom</option>
-            </select>
+            <label>
+              <select v-model="group.row">
+                <option value="top">Top</option>
+                <option value="middle">Centre</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </label>
           </div>
           <SpinButton class="spin-button" @roll="setDebug">DEBUG SPIN</SpinButton>
         </div>
@@ -133,10 +137,32 @@ export default {
     margin-top: 16px;
   }
 
-    .spin-button {
-      padding: 12px;
-      font-size: 48px;
-      flex: 0 0 auto;
+  label {
+    position: relative;
+    color: $reel-background;
+
+    &:not(:last-child) {
+      margin-right: 4px;
     }
+
+    &:after {
+      color: $reel-background;
+      font-family: Helvetica, Arial sans-serif;
+      content: '\25BC';
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      font-size: 10px;
+    }
+  }
+
+  select {
+    font-family: 'Roboto Slab', serif;
+    appearance: none;
+    background: transparent;
+    outline: none;
+    border: 1px solid $reel-background;
+    padding: 8px 18px 8px 8px;
+    color: $reel-background;
   }
 </style>
