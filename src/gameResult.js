@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { checkRows, rowConditions } from './winnings'
 import { REEL_FACE_NAMES } from './constants/faces'
 

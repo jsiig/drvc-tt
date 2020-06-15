@@ -18,7 +18,7 @@
         <td v-if="item.wins.all">{{item.wins.all}}</td>
         <td v-else>
           Top: {{item.wins.top}} <br>
-          Middle: {{item.wins.middle}} <br>
+          Centre: {{item.wins.middle}} <br>
           Bottom: {{item.wins.bottom}}
         </td>
       </tr>
@@ -70,10 +70,19 @@ export default {
     background: $table-background;
     color: $reel-background;
     border-radius: 32px;
+    overflow: hidden;
     border-collapse: collapse;
     box-shadow: 2px 2px 8px 0 rgba($reel-background, 0.25);
     margin-top: $game-margin;
-    font-family: 'Passion One', cursive;
+
+    th {
+      font-size: 110%;
+      font-family: 'Goblin One', cursive;
+    }
+
+    td {
+      font-family: 'Roboto Slab', serif;
+    }
 
     img {
       max-width: 28px;

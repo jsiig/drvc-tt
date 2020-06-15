@@ -2,21 +2,18 @@
   <div id="slot-machine-app">
     <Game></Game>
     <Debug></Debug>
-    <!-- <TestReel></TestReel> -->
   </div>
 </template>
 
 <script>
 import Game from './components/Game'
 import Debug from './components/Debug'
-// import TestReel from './components/TestReel'
 
 export default {
   name: 'App',
   components: {
     Game,
     Debug
-    // TestReel
   }
 }
 </script>
@@ -28,8 +25,7 @@ html, body {
   background: #6E4630;
   &, * { box-sizing: border-box; }
   margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-
+  font-family: "Roboto Slab", Times, Georgia, serif;
 }
 #slot-machine-app {
   display: flex;

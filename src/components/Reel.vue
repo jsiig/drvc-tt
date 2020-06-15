@@ -84,12 +84,11 @@ export default {
         setTimeout(() => this.rollFinished(this.reelIndex), 1000)
         return
       }
+
+      // Since there are three reels running independently,
+      // requestAnimationFrame isn't the best idea, but it'll do the trick
       requestAnimationFrame(() => this.rollTheReelToPosition(toPositionDeg))
     }
-  },
-
-  mounted () {
-    // this.rollTheReel(this.position + 3)
   },
 
   watch: {

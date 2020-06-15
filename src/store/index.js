@@ -52,15 +52,11 @@ export default new Vuex.Store({
       const winnings = gameResult.getWinnings()
 
       if (winnings) {
-        console.log('WIN!')
         commit('pushWinnings', winnings)
         commit('updateBalance', state.balance + winnings.amount)
-        console.log(state.balance)
       } else {
         commit('pushWinnings', null)
       }
-
-      console.log(gameResult.getFaceNames(), winnings)
     }
   },
 

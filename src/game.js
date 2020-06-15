@@ -1,9 +1,7 @@
-/* eslint-disable */
 import translateDirection from './translateDirection'
 
 const randomInt = max => Math.ceil(Math.random() * Math.floor(max))
 const MAX = 9
-
 
 export default class Game {
   constructor (userInput = []) {
@@ -27,27 +25,23 @@ export default class Game {
       )
     ) return
 
-    const middleRowItems = this.userInput.map(item => {
+    return this.userInput.map(item => {
       let middleRowItem
       switch (item.row) {
         case 'top':
           middleRowItem = translateDirection.translateSingle(item.value, 'down')
-          break;
+          break
         case 'middle':
           middleRowItem = item.value
-          break;
+          break
         case 'bottom':
           middleRowItem = translateDirection.translateSingle(item.value, 'up')
-          break;
+          break
         default:
-          break;
+          break
       }
 
       return middleRowItem
     })
-
-    return [
-      ...middleRowItems
-    ]
   }
 }
