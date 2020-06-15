@@ -14,7 +14,8 @@ cases the lack of use of classes/selectors. Somewhat similar to
 `styled-components` in the React world
 * The reels are created using CSS 3D transform for the reel faces, 
 and rotating them - visible in Reel.vue. Original CSS for the 
-reel was generated using [TriDiv Editor](http://tridiv.com/app).
+reel was generated using [TriDiv Editor](http://tridiv.com/app),
+and modified to be fit for purpose.
 * This approach unfortunately also means that the reels are fairly
 difficult to make responsive (to browser width), and I have not 
 included this in the scope of the task.
