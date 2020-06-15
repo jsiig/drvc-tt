@@ -7,6 +7,11 @@ View this running in production:
 For reference, task description has been included in this repository: 
 `task_description.pdf`.
 
+If you need production output files for any reason, please run the
+build command found at the bottom of this file, or, alternatively,
+download it [from here](https://derivco-test-task.siig.ee/dist.zip)
+in zip format.
+
 ### Some notes, approaches, regrets and limitations
 
 * Built using VueJS + Vuex.
