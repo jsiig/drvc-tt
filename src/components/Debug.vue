@@ -113,7 +113,7 @@ export default {
     }
 
     &__column {
-      padding: 12px;
+      padding: 0 10px;
     }
 
     &__wrap {
@@ -124,6 +124,14 @@ export default {
       left: 0;
       box-shadow: -2px 0 8px 0 rgba(0,0,0, 0.25);
     }
+  }
+
+  .spin-button {
+    padding: 12px;
+    font-size: 48px;
+    flex: 0 0 auto;
+    margin-top: 16px;
+  }
 
     .spin-button {
       padding: 12px;
