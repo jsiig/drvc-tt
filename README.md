@@ -1,6 +1,7 @@
 # slot-machine - Derivco test task
 
 ## Info
+View this running in production: [https://derivco-test-task.siig.ee](https://derivco-test-task.siig.ee/)
 
 ### Some notes, approaches, regrets and limitations
 
